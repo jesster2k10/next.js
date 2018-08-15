@@ -23,7 +23,7 @@ function styledJsxOptions (opts) {
   return opts
 }
 
-module.exports = (context, opts = {}) => ({
+const exp = (context, opts = {}) => ({
   presets: [
     [require('@babel/preset-env'), {
       modules: false,
@@ -45,3 +45,7 @@ module.exports = (context, opts = {}) => ({
     process.env.NODE_ENV === 'production' && require('babel-plugin-transform-react-remove-prop-types')
   ].filter(Boolean)
 })
+
+module.exports = exp
+
+module.exports.default = exp
