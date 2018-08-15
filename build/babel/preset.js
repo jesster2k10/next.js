@@ -23,7 +23,7 @@ function styledJsxOptions (opts) {
   return opts
 }
 
-module.exports = (context, opts = {}) => ({
+const exportedFunction = (context, opts = {}) => ({
   presets: [
     [require('@babel/preset-env'), {
       modules: false,
@@ -37,7 +37,7 @@ module.exports = (context, opts = {}) => ({
     require('./plugins/react-loadable-plugin'),
     [require('@babel/plugin-proposal-class-properties'), opts['class-properties'] || {}],
     require('@babel/plugin-proposal-object-rest-spread'),
-    [require('@babel/plugin-transform-runtime'), opts['transform-runtime'] || {
+    [require('@babel/plugin-transform-runtime').default, opts['transform-runtime'] || {
       helpers: false,
       regenerator: true
     }],
@@ -45,3 +45,7 @@ module.exports = (context, opts = {}) => ({
     process.env.NODE_ENV === 'production' && require('babel-plugin-transform-react-remove-prop-types')
   ].filter(Boolean)
 })
+
+module.exports = exportedFunction;
+module.exports.default = exportedFunction;
+
